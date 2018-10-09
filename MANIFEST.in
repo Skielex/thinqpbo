@@ -1,8 +1,3 @@
-include qpbo/*.py
-
-include qpbo/src/core/*.h
-include qpbo/src/core/*.inc
-include qpbo/src/core/*.cpp
-include qpbo/src/core/*.TXT
+recursive-include qpbo *.py *.h *.inc *.cpp *.TXT
 
 include setup.py
