@@ -5,7 +5,7 @@ from _QPBO cimport QPBO
 cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
     cdef QPBO[int]* c_qpbo
 
-    def __cinit__(self, int node_num_max, int edge_num_max):
+    def __cinit__(self, int node_num_max=0, int edge_num_max=0):
         self.c_qpbo = new QPBO[int](node_num_max, edge_num_max)
 
     def __dealloc__(self):
@@ -34,4 +34,14 @@ cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
     def add_pairwise_term(self, int e, int i, int j, int E00, int E01, int E10, int E11):
         self.c_qpbo.AddPairwiseTerm(e, i, j, E00, E01, E10, E11)
 
-    
+    def get_label(self, int i):
+        return self.c_qpbo.GetLabel(i)
+
+    def solve(self):
+        self.c_qpbo.Solve()
+
+    def compute_weak_persistencies(self):
+        self.c_qpbo.ComputeWeakPersistencies()
+
+    def improve(self):
+        return self.c_qpbo.Improve()
