@@ -34,6 +34,9 @@ cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
     def add_pairwise_term(self, int e, int i, int j, int E00, int E01, int E10, int E11):
         self.c_qpbo.AddPairwiseTerm(e, i, j, E00, E01, E10, E11)
 
+    def merge_parallel_edges(self):
+        self.c_qpbo.MergeParallelEdges()
+
     def get_label(self, int i):
         return self.c_qpbo.GetLabel(i)
 
