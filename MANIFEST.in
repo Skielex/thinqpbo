@@ -1,0 +1,8 @@
+include qpbo/*.py
+
+include qpbo/src/core/*.h
+include qpbo/src/core/*.inc
+include qpbo/src/core/*.cpp
+include qpbo/src/core/*.TXT
+
+include setup.py
