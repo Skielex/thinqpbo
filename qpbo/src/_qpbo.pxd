@@ -4,19 +4,19 @@
 from libcpp cimport bool
 
 ctypedef int NodeId;
-ctypedef int EdgeId;
+ctypedef long long EdgeId;
 
 cdef extern from "core/QPBO.h":
     struct ProbeOptions:
         pass
 
     cdef cppclass QPBO[REAL]:
-        QPBO(int node_num_max, int edge_num_max) except +
+        QPBO(int node_num_max, long long edge_num_max) except +
         bool Save(char* filename)
         bool Load(char* filename)
         void Reset()
-        int GetMaxEdgeNum()
-        void SetMaxEdgeNum(int num)
+        long long GetMaxEdgeNum()
+        void SetMaxEdgeNum(long long num)
         NodeId AddNode(int num)
         void AddUnaryTerm(NodeId i, REAL E0, REAL E1)
         EdgeId AddPairwiseTerm(NodeId i, NodeId j, REAL E00, REAL E01, REAL E10, REAL E11)

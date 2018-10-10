@@ -5,7 +5,7 @@ from _QPBO cimport QPBO
 cdef public class QPBOFloat[object PyObject_QPBOFloat, type QPBOFloat]:
     cdef QPBO[float]* c_qpbo
 
-    def __cinit__(self, int node_num_max=0, int edge_num_max=0):
+    def __cinit__(self, int node_num_max=0, long edge_num_max=0):
         """Constructor. 
         The first argument gives an estimate of the maximum number of nodes that can be added
         to the graph, and the second argument is an estimate of the maximum number of edges.

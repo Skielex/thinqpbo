@@ -25,7 +25,7 @@
 
 
 template <typename REAL> 
-	QPBO<REAL>::QPBO(int node_num_max, int edge_num_max, void (*err_function)(const char *))
+	QPBO<REAL>::QPBO(int node_num_max, long long edge_num_max, void (*err_function)(const char *))
 	: node_num(0),
 	  nodeptr_block(NULL),
 	  changed_list(NULL),
@@ -86,8 +86,8 @@ template <typename REAL>
 	  error_function(q.error_function),
 	  zero_energy(q.zero_energy)
 {
-	int node_num_max = q.node_shift/sizeof(Node);
-	int arc_num_max = (int)(q.arc_max[0] - q.arcs[0]);
+	long long node_num_max = q.node_shift/sizeof(Node);
+	long long arc_num_max = (long long)(q.arc_max[0] - q.arcs[0]);
 	Node* i;
 	Arc* a;
 
@@ -217,10 +217,10 @@ template <typename REAL>
 }
 
 template <typename REAL> 
-	void QPBO<REAL>::reallocate_arcs(int arc_num_max_new)
+	void QPBO<REAL>::reallocate_arcs(long long arc_num_max_new)
 {
-	int arc_num_max_old = (int)(arc_max[0] - arcs[0]);
-	int arc_num_max = arc_num_max_new; if (arc_num_max & 1) arc_num_max ++;
+	long long arc_num_max_old = (long long)(arc_max[0] - arcs[0]);
+	long long arc_num_max = arc_num_max_new; if (arc_num_max & 1) arc_num_max ++;
 	code_assert(arc_num_max > arc_num_max_old);
 	Arc* arcs_old[2] = { arcs[0], arcs[1] };
 
@@ -278,8 +278,8 @@ template <typename REAL>
 template <typename REAL> 
 	bool QPBO<REAL>::Save(char* filename)
 {
-	int e;
-	int edge_num = 0;
+	long long e;
+	long long edge_num = 0;
 	for (e=GetNextEdgeId(-1); e>=0; e=GetNextEdgeId(e)) edge_num ++;
 
 	FILE* fp;
@@ -329,7 +329,8 @@ template <typename REAL>
 	const char* type_name;
 	const char* type_format;
 	char LINE[256], FORMAT_LINE_NODE[64], FORMAT_LINE_EDGE[64];
-	int NODE_NUM, EDGE_NUM, K;
+	int NODE_NUM, K;
+	long long EDGE_NUM;
 
 	get_type_information(type_name, type_format);
 
@@ -394,7 +395,7 @@ template <typename REAL>
 		reallocate_arcs(2*(GetMaxEdgeNum() + GetMaxEdgeNum()/2));
 	}
 
-	EdgeId e = (int)(first_free - arcs[IsArc0(first_free) ? 0 : 1])/2;
+	EdgeId e = (EdgeId)(first_free - arcs[IsArc0(first_free) ? 0 : 1])/2;
 	first_free = first_free->next;
 
 	if (stage == 0)

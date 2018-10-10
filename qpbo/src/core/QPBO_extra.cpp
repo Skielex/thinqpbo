@@ -508,7 +508,7 @@ template <typename REAL>
 	int i_index, j_index;
 	int nodeNumOld = GetNodeNum();
 	int nodeNumNew = 1;
-	int edgeNumOld = GetMaxEdgeNum();
+	long long edgeNumOld = GetMaxEdgeNum();
 	int e;
 	Node* i;
 
@@ -595,7 +595,7 @@ template <typename REAL>
 	}
 
 	////////////////////////////////////////////////////////////////
-	int edgeNumNew = 0;
+	long long edgeNumNew = 0;
 	for (e=0; e<edgeNumOld; e++)
 	{
 		if ( arcs[0][2*e].sister )
@@ -717,7 +717,7 @@ private:
 };
 
 template <typename REAL>
-	void QPBO<REAL>::SetMaxEdgeNum(int num)
+	void QPBO<REAL>::SetMaxEdgeNum(long long num)
 {
 	if (num > GetMaxEdgeNum()) reallocate_arcs(2*num);
 }
