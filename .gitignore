@@ -1,5 +1,4 @@
 MANIFEST
-qpbo/src/core
 qpbo/src/_qpbo.cpp
 qpbo/src/_qpbo.h
 

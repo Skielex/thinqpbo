@@ -2,21 +2,8 @@ import os
 import urllib.request
 from zipfile import ZipFile
 from setuptools import setup, Extension
-from distutils.command.build_ext import build_ext
 from Cython.Build import cythonize
 import numpy as np
-
-
-class QPBOInstall(build_ext):
-    def run(self):
-        if not os.path.exists("qpbo/src/core"):
-            urllib.request.urlretrieve(
-                "http://pub.ist.ac.at/~vnk/software/QPBO-v1.4.src.zip", "QPBO-v1.4.src.zip")
-            with ZipFile("QPBO-v1.4.src.zip") as zfile:
-                zfile.extractall('qpbo/src')
-            os.remove("QPBO-v1.4.src.zip")
-            os.rename("qpbo/src/QPBO-v1.4.src", "qpbo/src/core")
-        build_ext.run(self)
 
 
 class LazyCythonize(list):
@@ -65,7 +52,6 @@ setup(name='qpbo-lite',
       author_email="niejep@dtu.dk",
       description='QPBO for Python',
       url="",
-      cmdclass={"build_ext": QPBOInstall},
       ext_modules=LazyCythonize(extensions),
       requires=['numpy', 'Cython']
       )
