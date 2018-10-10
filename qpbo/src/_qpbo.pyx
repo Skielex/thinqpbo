@@ -2,8 +2,8 @@
 
 from _QPBO cimport QPBO
 
-cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
-    cdef QPBO[int]* c_qpbo
+cdef public class QPBOFloat[object PyObject_QPBOFloat, type QPBOFloat]:
+    cdef QPBO[float]* c_qpbo
 
     def __cinit__(self, int node_num_max=0, int edge_num_max=0):
         """Constructor. 
@@ -23,7 +23,7 @@ cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
         2. If Probe() is used with option=1 or option=2, then it is advisable to specify
         a larger value of edge_num_max (e.g. twice the number of edges in the original energy).
         """
-        self.c_qpbo = new QPBO[int](node_num_max, edge_num_max)
+        self.c_qpbo = new QPBO[float](node_num_max, edge_num_max)
 
     def __dealloc__(self):
         """Destructor
@@ -61,19 +61,19 @@ cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
         """
         return self.c_qpbo.AddNode(num)
 
-    def add_unary_term(self, int i, int E0, int E1):
+    def add_unary_term(self, int i, float E0, float E1):
         """Adds unary term Ei(x_i) to the energy function with cost values Ei(0)=E0, Ei(1)=E1.
 	    Can be called multiple times for each node.
         """
         self.c_qpbo.AddUnaryTerm(i, E0, E1)
 
-    def add_pairwise_term(self, int i, int j, int E00, int E01, int E10, int E11):
+    def add_pairwise_term(self, int i, int j, float E00, float E01, float E10, float E11):
         """Adds pairwise term Eij(x_i, x_j) with cost values E00, E01, E10, E11.
 	    IMPORTANT: see note about the constructor 
         """
         return self.c_qpbo.AddPairwiseTerm(i, j, E00, E01, E10, E11)
 
-    def add_pairwise_term(self, int e, int i, int j, int E00, int E01, int E10, int E11):
+    def add_pairwise_term(self, int e, int i, int j, float E00, float E01, float E10, float E11):
         """This function modifies an already existing pairwise term.
         """
         self.c_qpbo.AddPairwiseTerm(e, i, j, E00, E01, E10, E11)
@@ -92,6 +92,11 @@ cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
 
     def get_node_num(self):
         return self.c_qpbo.GetNodeNum()
+
+    def compute_twice_lower_bound(self):
+        """Returns the lower bound defined by current reparameterizaion.
+        """
+        return self.c_qpbo.ComputeTwiceLowerBound()
 
     def solve(self):
         """Runs QPBO. After calling Solve(), use GetLabel(i) to get label of node i.
