@@ -123,6 +123,38 @@ cdef public class QPBOFloat[object PyObject_QPBOFloat, type QPBOFloat]:
         """
         self.c_qpbo.ComputeWeakPersistencies()
 
+    def stitch(self):
+        """GetRegion()/Stitch():
+        ComputeWeakPersistencies() also splits pixels into regions (``strongly connected components'') U^0, U^1, ..., U^k as described in
+        
+            A. Billionnet and B. Jaumard. 
+            A decomposition method for minimizing quadratic pseudoboolean functions. 
+            Operation Research Letters, 8:161�163, 1989.	
+    
+        For a review see also 
+    
+            V. Kolmogorov, C. Rother
+            Minimizing non-submodular functions with graph cuts - a review
+            Technical report MSR-TR-2006-100, July 2006. To appear in PAMI.
+    
+        Nodes in U^0 are labeled, nodes in U^1, ..., U^k are unlabeled.
+        (To find out to what region node i belongs, call GetRegion(i)).
+        The user can use these regions as follows:
+        -- For each r=1..k, compute somehow minimum x^r of the energy corresponding to region U^r.
+            This energy can be obtained by calling GetPairwiseTerm() for edges inside the region.
+            (There are no unary terms). Note that computing the global minimum is NP-hard;
+            it is up to the user to decide how to solve this problem.
+        -- Set the labeling by calling SetLabel().
+        -- Call Stitch(). It will compute a complete global minimum (in linear time).
+        -- Call GetLabel() for nodes in U^1, ..., U^k to read new solution.
+        Note that if the user can provides approximate rather than global minima x^r, then the stitching
+        can still be done but the result is not guaranteed to be a *global* minimum.
+    
+        GetRegion()/Stitch() can be called only immediately after ComputeWeakPersistencies().
+        NOTE: Stitch() changes the stored energy!
+        """
+        self.c_qpbo.Stitch()
+
     def improve(self):
         """Tries to improve the labeling provided by the user (via SetLabel()).
         The new labeling is guaranteed to have the same or smaller energy than the input labeling.
@@ -265,6 +297,38 @@ cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
         NOTE: if the energy is submodular, then ComputeWeakPersistences() will label all nodes (in general, this is not necessarily true for Solve()).
         """
         self.c_qpbo.ComputeWeakPersistencies()
+
+    def stitch(self):
+        """GetRegion()/Stitch():
+        ComputeWeakPersistencies() also splits pixels into regions (``strongly connected components'') U^0, U^1, ..., U^k as described in
+        
+            A. Billionnet and B. Jaumard. 
+            A decomposition method for minimizing quadratic pseudoboolean functions. 
+            Operation Research Letters, 8:161�163, 1989.	
+    
+        For a review see also 
+    
+            V. Kolmogorov, C. Rother
+            Minimizing non-submodular functions with graph cuts - a review
+            Technical report MSR-TR-2006-100, July 2006. To appear in PAMI.
+    
+        Nodes in U^0 are labeled, nodes in U^1, ..., U^k are unlabeled.
+        (To find out to what region node i belongs, call GetRegion(i)).
+        The user can use these regions as follows:
+        -- For each r=1..k, compute somehow minimum x^r of the energy corresponding to region U^r.
+            This energy can be obtained by calling GetPairwiseTerm() for edges inside the region.
+            (There are no unary terms). Note that computing the global minimum is NP-hard;
+            it is up to the user to decide how to solve this problem.
+        -- Set the labeling by calling SetLabel().
+        -- Call Stitch(). It will compute a complete global minimum (in linear time).
+        -- Call GetLabel() for nodes in U^1, ..., U^k to read new solution.
+        Note that if the user can provides approximate rather than global minima x^r, then the stitching
+        can still be done but the result is not guaranteed to be a *global* minimum.
+    
+        GetRegion()/Stitch() can be called only immediately after ComputeWeakPersistencies().
+        NOTE: Stitch() changes the stored energy!
+        """
+        self.c_qpbo.Stitch()
 
     def improve(self):
         """Tries to improve the labeling provided by the user (via SetLabel()).
