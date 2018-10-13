@@ -1,11 +1,11 @@
 # distutils: language = c++
 
-from _QPBO cimport QPBO
+from _QPBO cimport QPBO, EdgeId
 
 cdef public class QPBOFloat[object PyObject_QPBOFloat, type QPBOFloat]:
     cdef QPBO[float]* c_qpbo
 
-    def __cinit__(self, int node_num_max=0, long edge_num_max=0):
+    def __cinit__(self, int node_num_max=0, EdgeId edge_num_max=0):
         """Constructor. 
         The first argument gives an estimate of the maximum number of nodes that can be added
         to the graph, and the second argument is an estimate of the maximum number of edges.
@@ -180,7 +180,7 @@ cdef public class QPBOFloat[object PyObject_QPBOFloat, type QPBOFloat]:
 cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
     cdef QPBO[int]* c_qpbo
 
-    def __cinit__(self, int node_num_max=0, long edge_num_max=0):
+    def __cinit__(self, int node_num_max=0, EdgeId edge_num_max=0):
         """Constructor. 
         The first argument gives an estimate of the maximum number of nodes that can be added
         to the graph, and the second argument is an estimate of the maximum number of edges.

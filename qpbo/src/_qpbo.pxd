@@ -11,12 +11,12 @@ cdef extern from "core/QPBO.h":
         pass
 
     cdef cppclass QPBO[REAL]:
-        QPBO(int node_num_max, long long edge_num_max) except +
+        QPBO(int node_num_max, EdgeId edge_num_max) except +
         bool Save(char* filename)
         bool Load(char* filename)
         void Reset()
-        long long GetMaxEdgeNum()
-        void SetMaxEdgeNum(long long num)
+        EdgeId GetMaxEdgeNum()
+        void SetMaxEdgeNum(EdgeId num)
         NodeId AddNode(int num)
         void AddUnaryTerm(NodeId i, REAL E0, REAL E1)
         EdgeId AddPairwiseTerm(NodeId i, NodeId j, REAL E00, REAL E01, REAL E10, REAL E11)
