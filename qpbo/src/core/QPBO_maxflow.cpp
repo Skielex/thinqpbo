@@ -1,7 +1,7 @@
 /* QPBO_maxflow.cpp */
 /*
     Copyright 2006-2008 Vladimir Kolmogorov (vnk@ist.ac.at).
-	Modifications Copyright 2018 Niels Jeppesen (niejep@dtu.dk).
+    Modifications Copyright 2018 Niels Jeppesen (niejep@dtu.dk).
 
     This file is part of QPBO.
 
