@@ -411,10 +411,10 @@ private:
 		Node	*next;		// pointer to the next active Node
 							// (or to itself if it is the last Node in the list)
 
-		unsigned int is_sink : 1;	// flag showing whether the node is in the source or in the sink tree (if parent!=NULL)
-		unsigned int is_marked : 1;	// set by mark_node()
-		unsigned int is_in_changed_list : 1; // set by maxflow if the node is added to changed_list
-		unsigned int is_removed : 1; // 1 means that the node is removed (for node[0][...])
+		bool is_sink : true;	// flag showing whether the node is in the source or in the sink tree (if parent!=NULL)
+		bool is_marked : true;	// set by mark_node()
+		bool is_in_changed_list : true; // set by maxflow if the node is added to changed_list
+		bool is_removed : true; // true means that the node is removed (for node[0][...])
 
 		int	         label : 2;
 		int	         label_after_fix0 : 2;
@@ -638,7 +638,7 @@ template <typename REAL>
 {
 	if (i->parent)
 	{
-		return (i->is_sink) ? 1 : 0;
+		return (i->is_sink) ? true : false;
 	}
 	else
 	{
