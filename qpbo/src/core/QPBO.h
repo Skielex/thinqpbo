@@ -3,7 +3,8 @@
 	Version 1.4
 
     Copyright 2006-2008 Vladimir Kolmogorov (vnk@ist.ac.at).
-
+	Modifications Copyright 2018 Niels Jeppesen (niejep@dtu.dk).
+	
     This file is part of QPBO.
 
     QPBO is free software: you can redistribute it and/or modify
