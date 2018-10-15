@@ -148,8 +148,8 @@ template <typename REAL>
 		if (i==node_last[0]) i = nodes[1];
 
 		i -> next = NULL;
-		i -> is_marked = 0;
-		i -> is_in_changed_list = 0;
+		i -> is_marked = false;
+		i -> is_in_changed_list = false;
 		i -> TS = TIME;
 		if (i->tr_cap > 0)
 		{
@@ -202,7 +202,7 @@ template <typename REAL>
 			if (GetMate1(i)->is_removed) continue;
 		}
 		i->next = NULL;
-		i->is_marked = 0;
+		i->is_marked = false;
 		set_active(i);
 
 		if (i->tr_cap == 0)
