@@ -45,13 +45,32 @@ def extensions():
     return cythonize([maxflow_module])
 
 
-setup(name='qpbo-lite',
-      packages=['qpbo'],
+setup(name="thin-pyqpbo",
       version="0.1.0",
       author="Niels Jeppesen",
       author_email="niejep@dtu.dk",
-      description='QPBO for Python',
-      url="",
+      description="A thin QPBO wrapper for Python",
+      url="https://github.com/Skielex/thin-pyqpbo",
+      license="GPL",
+      long_description="""
+      
+      """,
+      classifiers=[
+          "Development Status :: 3 - Alpha",
+          "Environment :: Console",
+          "Intended Audience :: Developers",
+          "Intended Audience :: Science/Research",
+          "License :: OSI Approved :: GNU General Public License (GPL)",
+          "Natural Language :: English",
+          "Operating System :: OS Independent",
+          "Programming Language :: C++",
+          "Programming Language :: Python",
+          "Topic :: Scientific/Engineering :: Image Recognition",
+          "Topic :: Scientific/Engineering :: Artificial Intelligence",
+          "Topic :: Scientific/Engineering :: Mathematics"
+      ],
+      packages=["qpbo"],
       ext_modules=LazyCythonize(extensions),
-      requires=['numpy', 'Cython']
+      requires=["numpy", "Cython"],
+      setup_requires=['numpy', 'Cython']
       )
