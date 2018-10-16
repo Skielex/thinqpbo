@@ -1,0 +1,3 @@
+[submodule "qpbo/src/core"]
+	path = qpbo/src/core
+	url = ../QPBO
