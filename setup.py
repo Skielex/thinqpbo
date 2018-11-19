@@ -29,13 +29,13 @@ def extensions():
     numpy_include_dir = np.get_include()
 
     maxflow_module = Extension(
-        "qpbo._qpbo",
+        "thinqpbo._qpbo",
         [
-            "qpbo/src/_qpbo.pyx",
-            "qpbo/src/core/QPBO.cpp",
-            "qpbo/src/core/QPBO_extra.cpp",
-            "qpbo/src/core/QPBO_maxflow.cpp",
-            "qpbo/src/core/QPBO_postprocessing.cpp",
+            "thinqpbo/src/_qpbo.pyx",
+            "thinqpbo/src/core/QPBO.cpp",
+            "thinqpbo/src/core/QPBO_extra.cpp",
+            "thinqpbo/src/core/QPBO_maxflow.cpp",
+            "thinqpbo/src/core/QPBO_postprocessing.cpp",
         ],
         language="c++",
         include_dirs=[
@@ -45,12 +45,12 @@ def extensions():
     return cythonize([maxflow_module])
 
 
-setup(name="thin-pyqpbo",
+setup(name="thinqpbo",
       version="0.1.0",
       author="Niels Jeppesen",
       author_email="niejep@dtu.dk",
       description="A thin QPBO wrapper for Python",
-      url="https://github.com/Skielex/thin-pyqpbo",
+      url="https://github.com/Skielex/thinqpbo",
       license="GPL",
       long_description="""
       
@@ -69,7 +69,7 @@ setup(name="thin-pyqpbo",
           "Topic :: Scientific/Engineering :: Artificial Intelligence",
           "Topic :: Scientific/Engineering :: Mathematics"
       ],
-      packages=["qpbo"],
+      packages=["thinqpbo"],
       ext_modules=LazyCythonize(extensions),
       requires=["numpy", "Cython"],
       setup_requires=['numpy', 'Cython']

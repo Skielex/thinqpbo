@@ -1,4 +1,4 @@
-# qpbo.pxd
+# _qpbo.pxd
 # distutils: language = c++
 
 from libcpp cimport bool

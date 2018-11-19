@@ -1,6 +1,7 @@
 MANIFEST
-qpbo/src/_qpbo.cpp
-qpbo/src/_qpbo.h
+thinqpbo/src/_qpbo.cpp
+thinqpbo/src/_qpbo.h
+.vscode/
 
 # Created by https://www.gitignore.io/api/c,osx,c++,linux,python
 
