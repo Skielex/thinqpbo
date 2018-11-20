@@ -1,0 +1,4 @@
+[submodule "thinqpbo/src/core"]
+	path = thinqpbo/src/core
+	url = ../QPBO
+	branch = master
