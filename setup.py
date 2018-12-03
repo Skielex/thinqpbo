@@ -1,9 +1,10 @@
-import os
-import urllib.request
-from zipfile import ZipFile
 from setuptools import setup, Extension
 from Cython.Build import cythonize
 import numpy as np
+
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
 
 class LazyCythonize(list):
@@ -50,11 +51,9 @@ setup(name="thinqpbo",
       author="Niels Jeppesen",
       author_email="niejep@dtu.dk",
       description="A thin QPBO wrapper for Python",
+      long_description=long_description,
       url="https://github.com/Skielex/thinqpbo",
-      license="GPL",
-      long_description="""
-      
-      """,
+      packages=["thinqpbo"],
       classifiers=[
           "Development Status :: 3 - Alpha",
           "Environment :: Console",
@@ -69,7 +68,6 @@ setup(name="thinqpbo",
           "Topic :: Scientific/Engineering :: Artificial Intelligence",
           "Topic :: Scientific/Engineering :: Mathematics"
       ],
-      packages=["thinqpbo"],
       ext_modules=LazyCythonize(extensions),
       requires=["numpy", "Cython"],
       setup_requires=['numpy', 'Cython']
