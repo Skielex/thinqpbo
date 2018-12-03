@@ -52,6 +52,7 @@ setup(name="thinqpbo",
       author_email="niejep@dtu.dk",
       description="A thin QPBO wrapper for Python",
       long_description=long_description,
+      long_description_content_type="text/markdown",
       url="https://github.com/Skielex/thinqpbo",
       packages=["thinqpbo"],
       classifiers=[
