@@ -74,7 +74,7 @@ cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
         """
         return self.c_qpbo.AddPairwiseTerm(i, j, E00, E01, E10, E11)
 
-    def add_pairwise_term(self, int e, int i, int j, int E00, int E01, int E10, int E11):
+    def modify_pairwise_term(self, int e, int i, int j, int E00, int E01, int E10, int E11):
         """This function modifies an already existing pairwise term.
         """
         self.c_qpbo.AddPairwiseTerm(e, i, j, E00, E01, E10, E11)
@@ -249,7 +249,7 @@ cdef public class QPBOFloat[object PyObject_QPBOFloat, type QPBOFloat]:
         """
         return self.c_qpbo.AddPairwiseTerm(i, j, E00, E01, E10, E11)
 
-    def add_pairwise_term(self, int e, int i, int j, float E00, float E01, float E10, float E11):
+    def modify_pairwise_term(self, int e, int i, int j, float E00, float E01, float E10, float E11):
         """This function modifies an already existing pairwise term.
         """
         self.c_qpbo.AddPairwiseTerm(e, i, j, E00, E01, E10, E11)
@@ -424,7 +424,7 @@ cdef public class QPBODouble[object PyObject_QPBODouble, type QPBODouble]:
         """
         return self.c_qpbo.AddPairwiseTerm(i, j, E00, E01, E10, E11)
 
-    def add_pairwise_term(self, int e, int i, int j, double E00, double E01, double E10, double E11):
+    def modify_pairwise_term(self, int e, int i, int j, double E00, double E01, double E10, double E11):
         """This function modifies an already existing pairwise term.
         """
         self.c_qpbo.AddPairwiseTerm(e, i, j, E00, E01, E10, E11)
