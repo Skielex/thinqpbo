@@ -1,6 +1,5 @@
 from setuptools import setup, Extension
 from Cython.Build import cythonize
-import numpy as np
 
 
 with open("README.md", "r") as fh:
@@ -27,8 +26,6 @@ class LazyCythonize(list):
 
 def extensions():
 
-    numpy_include_dir = np.get_include()
-
     maxflow_module = Extension(
         "thinqpbo._qpbo",
         [
@@ -39,9 +36,6 @@ def extensions():
             "thinqpbo/src/core/QPBO_postprocessing.cpp",
         ],
         language="c++",
-        include_dirs=[
-            numpy_include_dir,
-        ]
     )
     return cythonize([maxflow_module])
 
@@ -70,6 +64,6 @@ setup(name="thinqpbo",
           "Topic :: Scientific/Engineering :: Mathematics"
       ],
       ext_modules=LazyCythonize(extensions),
-      requires=["numpy", "Cython"],
-      setup_requires=['numpy', 'Cython']
+      setup_requires=["Cython"],
+      install_requires =[]
       )
