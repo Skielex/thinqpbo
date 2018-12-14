@@ -1,5 +1,4 @@
 from setuptools import setup, Extension
-from Cython.Build import cythonize
 
 
 with open("README.md", "r") as fh:
@@ -25,6 +24,7 @@ class LazyCythonize(list):
 
 
 def extensions():
+    from Cython.Build import cythonize
 
     maxflow_module = Extension(
         "thinqpbo._qpbo",
@@ -41,7 +41,7 @@ def extensions():
 
 
 setup(name="thinqpbo",
-      version="0.1.1",
+      version="0.1.2",
       author="Niels Jeppesen",
       author_email="niejep@dtu.dk",
       description="A thin QPBO wrapper for Python",
@@ -64,6 +64,5 @@ setup(name="thinqpbo",
           "Topic :: Scientific/Engineering :: Mathematics"
       ],
       ext_modules=LazyCythonize(extensions),
-      setup_requires=["Cython"],
-      install_requires =[]
+      install_requires=["Cython"]
       )
