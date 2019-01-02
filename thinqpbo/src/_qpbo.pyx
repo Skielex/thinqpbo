@@ -1,6 +1,6 @@
 # distutils: language = c++
 
-from _QPBO cimport QPBO, EdgeId
+from .src._qpbo cimport QPBO, EdgeId
 
 
 cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
