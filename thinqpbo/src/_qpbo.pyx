@@ -94,6 +94,16 @@ cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
     def get_node_num(self):
         return self.c_qpbo.GetNodeNum()
 
+    def get_twice_unary_term(self, int i):
+        cdef int E0, E1
+        self.c_qpbo.GetTwiceUnaryTerm(i, E0, E1)
+        return (E0, E1)
+
+    def get_twice_pairwise_term(self, EdgeId e):
+        cdef int i, j, E00, E01, E10, E11
+        self.c_qpbo.GetTwicePairwiseTerm(e, i, j, E00, E01, E10, E11)
+        return (i, j, E00, E01, E10, E11)
+
     def compute_twice_energy(self, int option=0):
         """Return energy bound.
         NOTE: in the current implementation Probe() may add constants to the energy
@@ -424,7 +434,7 @@ cdef public class QPBODouble[object PyObject_QPBODouble, type QPBODouble]:
         """
         return self.c_qpbo.AddPairwiseTerm(i, j, E00, E01, E10, E11)
 
-    def modify_pairwise_term(self, int e, int i, int j, double E00, double E01, double E10, double E11):
+    def modify_pairwise_term(self, EdgeId e, int i, int j, double E00, double E01, double E10, double E11):
         """This function modifies an already existing pairwise term.
         """
         self.c_qpbo.AddPairwiseTerm(e, i, j, E00, E01, E10, E11)

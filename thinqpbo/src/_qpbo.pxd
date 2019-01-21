@@ -26,7 +26,7 @@ cdef extern from "core/QPBO.h":
         void SetLabel(NodeId i, char label)
         int GetNodeNum()
         void GetTwiceUnaryTerm(NodeId i, REAL& E0, REAL& E1)
-        void GetTwicePairwiseTerm(EdgeId e, NodeId i, NodeId j, REAL& E00, REAL& E01, REAL& E10, REAL& E11);
+        void GetTwicePairwiseTerm(EdgeId e, NodeId& i, NodeId& j, REAL& E00, REAL& E01, REAL& E10, REAL& E11);
         REAL ComputeTwiceEnergy(int option)
         REAL ComputeTwiceEnergy(int* labeling)
         REAL ComputeTwiceLowerBound()
