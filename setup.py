@@ -41,7 +41,7 @@ def extensions():
 
 
 setup(name="thinqpbo",
-      version="0.1.2",
+      version="0.1.3",
       author="Niels Jeppesen",
       author_email="niejep@dtu.dk",
       description="A thin QPBO wrapper for Python",
@@ -64,5 +64,5 @@ setup(name="thinqpbo",
           "Topic :: Scientific/Engineering :: Mathematics"
       ],
       ext_modules=LazyCythonize(extensions),
-      install_requires=["Cython"]
+      setup_requires=["Cython"]
       )

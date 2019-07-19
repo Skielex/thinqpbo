@@ -1,6 +1,6 @@
 # distutils: language = c++
 
-from .src._qpbo cimport QPBO, EdgeId
+from .src._qpbo cimport QPBO, EdgeId, NodeId
 
 
 cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
@@ -62,19 +62,19 @@ cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
         """
         return self.c_qpbo.AddNode(num)
 
-    def add_unary_term(self, int i, int E0, int E1):
+    def add_unary_term(self, NodeId i, int E0, int E1):
         """Adds unary term Ei(x_i) to the energy function with cost values Ei(0)=E0, Ei(1)=E1.
 	    Can be called multiple times for each node.
         """
         self.c_qpbo.AddUnaryTerm(i, E0, E1)
 
-    def add_pairwise_term(self, int i, int j, int E00, int E01, int E10, int E11):
+    def add_pairwise_term(self, NodeId i, NodeId j, int E00, int E01, int E10, int E11):
         """Adds pairwise term Eij(x_i, x_j) with cost values E00, E01, E10, E11.
 	    IMPORTANT: see note about the constructor 
         """
         return self.c_qpbo.AddPairwiseTerm(i, j, E00, E01, E10, E11)
 
-    def modify_pairwise_term(self, int e, int i, int j, int E00, int E01, int E10, int E11):
+    def modify_pairwise_term(self, EdgeId e, NodeId i, NodeId j, int E00, int E01, int E10, int E11):
         """This function modifies an already existing pairwise term.
         """
         self.c_qpbo.AddPairwiseTerm(e, i, j, E00, E01, E10, E11)
@@ -85,7 +85,7 @@ cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
         """
         self.c_qpbo.MergeParallelEdges()
 
-    def get_label(self, int i):
+    def get_label(self, NodeId i):
         """Returns 0 or 1, if the node is labeled, and a negative number otherwise.
 	    Can be called after Solve()/ComputeWeakPersistencies()/Probe()/Improve().
         """
@@ -93,6 +93,17 @@ cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
 
     def get_node_num(self):
         return self.c_qpbo.GetNodeNum()
+
+    def get_twice_unary_term(self, NodeId i):
+        cdef int E0, E1
+        self.c_qpbo.GetTwiceUnaryTerm(i, E0, E1)
+        return (E0, E1)
+
+    def get_twice_pairwise_term(self, EdgeId e):
+        cdef NodeId i, j
+        cdef int E00, E01, E10, E11
+        self.c_qpbo.GetTwicePairwiseTerm(e, i, j, E00, E01, E10, E11)
+        return (i, j, E00, E01, E10, E11)
 
     def compute_twice_energy(self, int option=0):
         """Return energy bound.
@@ -237,19 +248,19 @@ cdef public class QPBOFloat[object PyObject_QPBOFloat, type QPBOFloat]:
         """
         return self.c_qpbo.AddNode(num)
 
-    def add_unary_term(self, int i, float E0, float E1):
+    def add_unary_term(self, NodeId i, float E0, float E1):
         """Adds unary term Ei(x_i) to the energy function with cost values Ei(0)=E0, Ei(1)=E1.
 	    Can be called multiple times for each node.
         """
         self.c_qpbo.AddUnaryTerm(i, E0, E1)
 
-    def add_pairwise_term(self, int i, int j, float E00, float E01, float E10, float E11):
+    def add_pairwise_term(self, NodeId i, NodeId j, float E00, float E01, float E10, float E11):
         """Adds pairwise term Eij(x_i, x_j) with cost values E00, E01, E10, E11.
 	    IMPORTANT: see note about the constructor 
         """
         return self.c_qpbo.AddPairwiseTerm(i, j, E00, E01, E10, E11)
 
-    def modify_pairwise_term(self, int e, int i, int j, float E00, float E01, float E10, float E11):
+    def modify_pairwise_term(self, EdgeId e, NodeId i, NodeId j, float E00, float E01, float E10, float E11):
         """This function modifies an already existing pairwise term.
         """
         self.c_qpbo.AddPairwiseTerm(e, i, j, E00, E01, E10, E11)
@@ -260,7 +271,7 @@ cdef public class QPBOFloat[object PyObject_QPBOFloat, type QPBOFloat]:
         """
         self.c_qpbo.MergeParallelEdges()
 
-    def get_label(self, int i):
+    def get_label(self, NodeId i):
         """Returns 0 or 1, if the node is labeled, and a negative number otherwise.
 	    Can be called after Solve()/ComputeWeakPersistencies()/Probe()/Improve().
         """
@@ -268,6 +279,17 @@ cdef public class QPBOFloat[object PyObject_QPBOFloat, type QPBOFloat]:
 
     def get_node_num(self):
         return self.c_qpbo.GetNodeNum()
+
+    def get_twice_unary_term(self, NodeId i):
+        cdef float E0, E1
+        self.c_qpbo.GetTwiceUnaryTerm(i, E0, E1)
+        return (E0, E1)
+
+    def get_twice_pairwise_term(self, EdgeId e):
+        cdef NodeId i, j
+        cdef float E00, E01, E10, E11
+        self.c_qpbo.GetTwicePairwiseTerm(e, i, j, E00, E01, E10, E11)
+        return (i, j, E00, E01, E10, E11)
 
     def compute_twice_energy(self, int option=0):
         """Return energy bound.
@@ -412,19 +434,19 @@ cdef public class QPBODouble[object PyObject_QPBODouble, type QPBODouble]:
         """
         return self.c_qpbo.AddNode(num)
 
-    def add_unary_term(self, int i, double E0, double E1):
+    def add_unary_term(self, NodeId i, double E0, double E1):
         """Adds unary term Ei(x_i) to the energy function with cost values Ei(0)=E0, Ei(1)=E1.
 	    Can be called multiple times for each node.
         """
         self.c_qpbo.AddUnaryTerm(i, E0, E1)
 
-    def add_pairwise_term(self, int i, int j, double E00, double E01, double E10, double E11):
+    def add_pairwise_term(self, NodeId i, NodeId j, double E00, double E01, double E10, double E11):
         """Adds pairwise term Eij(x_i, x_j) with cost values E00, E01, E10, E11.
 	    IMPORTANT: see note about the constructor 
         """
         return self.c_qpbo.AddPairwiseTerm(i, j, E00, E01, E10, E11)
 
-    def modify_pairwise_term(self, int e, int i, int j, double E00, double E01, double E10, double E11):
+    def modify_pairwise_term(self, EdgeId e, NodeId i, NodeId j, double E00, double E01, double E10, double E11):
         """This function modifies an already existing pairwise term.
         """
         self.c_qpbo.AddPairwiseTerm(e, i, j, E00, E01, E10, E11)
@@ -435,7 +457,7 @@ cdef public class QPBODouble[object PyObject_QPBODouble, type QPBODouble]:
         """
         self.c_qpbo.MergeParallelEdges()
 
-    def get_label(self, int i):
+    def get_label(self, NodeId i):
         """Returns 0 or 1, if the node is labeled, and a negative number otherwise.
 	    Can be called after Solve()/ComputeWeakPersistencies()/Probe()/Improve().
         """
@@ -443,6 +465,17 @@ cdef public class QPBODouble[object PyObject_QPBODouble, type QPBODouble]:
 
     def get_node_num(self):
         return self.c_qpbo.GetNodeNum()
+
+    def get_twice_unary_term(self, NodeId i):
+        cdef double E0, E1
+        self.c_qpbo.GetTwiceUnaryTerm(i, E0, E1)
+        return (E0, E1)
+
+    def get_twice_pairwise_term(self, EdgeId e):
+        cdef NodeId i, j
+        cdef double E00, E01, E10, E11
+        self.c_qpbo.GetTwicePairwiseTerm(e, i, j, E00, E01, E10, E11)
+        return (i, j, E00, E01, E10, E11)
 
     def compute_twice_energy(self, int option=0):
         """Return energy bound.
