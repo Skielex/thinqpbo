@@ -64,5 +64,5 @@ setup(name="thinqpbo",
           "Topic :: Scientific/Engineering :: Mathematics"
       ],
       ext_modules=LazyCythonize(extensions),
-      install_requires=["Cython"]
+      setup_requires=["Cython"]
       )
