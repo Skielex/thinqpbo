@@ -91,6 +91,9 @@ cdef public class QPBOInt[object PyObject_QPBOInt, type QPBOInt]:
         """
         return self.c_qpbo.GetLabel(i)
 
+    def set_label(self, NodeId i, char label):
+        self.c_qpbo.SetLabel(i, label)
+
     def get_node_num(self):
         return self.c_qpbo.GetNodeNum()
 
@@ -277,6 +280,9 @@ cdef public class QPBOFloat[object PyObject_QPBOFloat, type QPBOFloat]:
         """
         return self.c_qpbo.GetLabel(i)
 
+    def set_label(self, NodeId i, char label):
+        self.c_qpbo.SetLabel(i, label)
+
     def get_node_num(self):
         return self.c_qpbo.GetNodeNum()
 
@@ -462,6 +468,9 @@ cdef public class QPBODouble[object PyObject_QPBODouble, type QPBODouble]:
 	    Can be called after Solve()/ComputeWeakPersistencies()/Probe()/Improve().
         """
         return self.c_qpbo.GetLabel(i)
+
+    def set_label(self, NodeId i, char label):
+        self.c_qpbo.SetLabel(i, label)
 
     def get_node_num(self):
         return self.c_qpbo.GetNodeNum()
