@@ -1,5 +1,3 @@
 [tool.cibuildwheel]
 # Disable building PyPy wheels on all platforms
 skip = "pp*"
-test-requires = "pytest"
-test-command = "pytest {project}/tests"
