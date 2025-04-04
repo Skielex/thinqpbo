@@ -1,4 +1,4 @@
-name: CI
+name: Test
 
 on:
   push:
@@ -9,8 +9,32 @@ on:
       - master
 
 jobs:
-  build-sdist:
+  check-format-and-lint:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install black isort
+
+      - name: Run Black formatting check
+        run: black --check .
+
+      - name: Run isort formatting check
+        run: |
+          isort --check-only .
+
+  test-and-build-sdist:
+    runs-on: ubuntu-latest
+    needs: check-format-and-lint
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,16 +49,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install build pytest black isort
+          pip install build pytest
           pip install -r requirements.txt
-
-      - name: Run Black formatting check
-        run: |
-          black --check .
-
-      - name: Run isort formatting check
-        run: |
-          isort --check-only .
 
       - name: Run tests
         run: |
@@ -55,8 +71,8 @@ jobs:
           name: sdist
           path: dist/*.tar.gz
 
-  build-wheels:
-    needs: build-sdist
+  test-and-build-wheels:
+    needs: check-format-and-lint
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
