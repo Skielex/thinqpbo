@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - master
+    exclude:
+      - "publish.yml"
   pull_request:
     branches:
       - master
+    exclude:
+      - "publish.yml"
 
 jobs:
   check-format-and-lint:
