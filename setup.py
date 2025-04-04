@@ -43,7 +43,7 @@ def extensions():
 
 setup(
     name="thinqpbo",
-    version="0.1.6",
+    version="0.1.5",
     author="Niels Jeppesen",
     author_email="niejep@dtu.dk",
     description="A thin QPBO wrapper for Python",
