@@ -1,0 +1,23 @@
+name: Publish to PyPI
+
+on:
+  workflow_run:
+    workflows:
+      - CI
+    types:
+      - completed
+
+jobs:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: dist
+
+      - name: Publish to PyPI
+        run: |
+          pip install twine
+          twine upload dist/* -u __token__ -p ${{ secrets.PYPI_API_TOKEN }}
