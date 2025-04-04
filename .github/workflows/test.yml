@@ -4,13 +4,13 @@ on:
   push:
     branches:
       - master
-    exclude:
-      - "publish.yml"
+    paths-ignore:
+      - ".github/workflows/publish.yml"
   pull_request:
     branches:
       - master
-    exclude:
-      - "publish.yml"
+    paths-ignore:
+      - ".github/workflows/publish.yml"
 
 jobs:
   check-format-and-lint:
