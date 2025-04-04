@@ -1,5 +1,6 @@
 import unittest
-from thinqpbo import QPBOInt, QPBOFloat, QPBODouble
+
+from thinqpbo import QPBODouble, QPBOFloat, QPBOInt
 
 
 class TestGraph(unittest.TestCase):
@@ -8,8 +9,7 @@ class TestGraph(unittest.TestCase):
         self.qpbo_types = [QPBOInt, QPBOFloat, QPBODouble]
 
     def test_create_qpbo(self):
-        """Test QPBO constructors.
-        """
+        """Test QPBO constructors."""
         for qpbo_type in self.qpbo_types:
             qpbo_type()
 
@@ -17,8 +17,7 @@ class TestGraph(unittest.TestCase):
             qpbo_type(100, 100)
 
     def test_add_node(self):
-        """Test add_node function. 
-        """
+        """Test add_node function."""
         for qpbo_type in self.qpbo_types:
 
             qpbo = qpbo_type()
@@ -36,8 +35,7 @@ class TestGraph(unittest.TestCase):
             self.assertEqual(node_count, 101)
 
     def test_add_pairwise_term(self):
-        """Test add_edge function. 
-        """
+        """Test add_edge function."""
         for qpbo_type in self.qpbo_types:
 
             qpbo = qpbo_type()
@@ -51,8 +49,7 @@ class TestGraph(unittest.TestCase):
             qpbo.add_pairwise_term(0, 0, 1, 1, 2, 0)
 
     def test_example(self):
-        """Test maxflow function.
-        """
+        """Test maxflow function."""
         for qpbo_type in self.qpbo_types:
 
             qpbo = qpbo_type()
@@ -65,11 +62,11 @@ class TestGraph(unittest.TestCase):
             self.assertEqual(first_node_id, 0)
 
             # Add edges.
-            qpbo.add_unary_term(0, 0, 5) # E1(0) = 5, s     --5->   n(0)
-            qpbo.add_unary_term(0, 1, 0) # E0(0) = 1, n(0)  --1->   t
-            qpbo.add_unary_term(1, 5, 0) # E0(1) = 5, n(1)  --5->   t
-            qpbo.add_pairwise_term(0, 1, 0, 7, 0, 4)   # E01(0,1) = 7, n(0)  --7->   n(1)
-                                                        # E11(0,1) = 4, Not possible with standard Maxflow
+            qpbo.add_unary_term(0, 0, 5)  # E1(0) = 5, s     --5->   n(0)
+            qpbo.add_unary_term(0, 1, 0)  # E0(0) = 1, n(0)  --1->   t
+            qpbo.add_unary_term(1, 5, 0)  # E0(1) = 5, n(1)  --5->   t
+            qpbo.add_pairwise_term(0, 1, 0, 7, 0, 4)  # E01(0,1) = 7, n(0)  --7->   n(1)
+            # E11(0,1) = 4, Not possible with standard Maxflow
 
             # Find maxflow/cut qpbo.
             qpbo.solve()
@@ -86,5 +83,5 @@ class TestGraph(unittest.TestCase):
             # Twice energy/flow: 12
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
