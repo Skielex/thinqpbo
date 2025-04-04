@@ -19,6 +19,7 @@ jobs:
 
       - name: Set up Python
         uses: actions/setup-python@v5
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
@@ -59,6 +60,7 @@ jobs:
 
       - name: Set up Python
         uses: actions/setup-python@v5
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
