@@ -44,7 +44,7 @@ jobs:
       - name: Upload sdist artifact
         uses: actions/upload-artifact@v4
         with:
-          name: release-dists
+          name: sdist
           path: dist/*.tar.gz
 
   build-wheels:
@@ -84,7 +84,7 @@ jobs:
       - name: Upload wheel artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: release-dists
+          name: wheels-${{ matrix.os }}-${{ matrix.python-version }}
           path: dist/*.whl
 
   pypi-publish:
@@ -107,7 +107,6 @@ jobs:
       - name: Retrieve release distributions
         uses: actions/download-artifact@v4
         with:
-          name: release-dists
           path: dist/
 
       - name: Publish release distributions to PyPI
