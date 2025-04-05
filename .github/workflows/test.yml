@@ -53,12 +53,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install build pytest
-          pip install -r requirements.txt
+          pip install build pytest .
 
       - name: Run tests
         run: |
-          pip install .
           pytest tests
 
       - name: Install dependencies
@@ -97,12 +95,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install build pytest
-          pip install -r requirements.txt
+          pip install build pytest .
 
       - name: Run tests
         run: |
-          pip install .
           pytest tests
 
       - name: Build wheels
