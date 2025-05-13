@@ -24,7 +24,9 @@ class QPBODouble:
 
         """
 
-    def add_pairwise_term(self, i: NodeId, j: NodeId, E00: float, E01: float, E10: float, E11: float):
+    def add_pairwise_term(
+        self, i: NodeId, j: NodeId, E00: float, E01: float, E10: float, E11: float
+    ):
         """
         Adds pairwise term Eij(x_i, x_j) with cost values E00, E01, E10, E11.
                     IMPORTANT: see note about the constructor
@@ -111,7 +113,9 @@ class QPBODouble:
 
         """
 
-    def modify_pairwise_term(self, e, i: NodeId, j: NodeId, E00: float, E01: float, E10: float, E11: float):
+    def modify_pairwise_term(
+        self, e, i: NodeId, j: NodeId, E00: float, E01: float, E10: float, E11: float
+    ):
         """
         This function modifies an already existing pairwise term.
 
@@ -195,7 +199,9 @@ class QPBOFloat:
 
         """
 
-    def add_pairwise_term(self, i: NodeId, j: NodeId, E00: float, E01: float, E10: float, E11: float):
+    def add_pairwise_term(
+        self, i: NodeId, j: NodeId, E00: float, E01: float, E10: float, E11: float
+    ):
         """
         Adds pairwise term Eij(x_i, x_j) with cost values E00, E01, E10, E11.
                     IMPORTANT: see note about the constructor
@@ -375,7 +381,9 @@ class QPBOInt:
 
         """
 
-    def add_pairwise_term(self, i: NodeId, j: NodeId, E00: int, E01: int, E10: int, E11: int):
+    def add_pairwise_term(
+        self, i: NodeId, j: NodeId, E00: int, E01: int, E10: int, E11: int
+    ):
         """
         Adds pairwise term Eij(x_i, x_j) with cost values E00, E01, E10, E11.
                     IMPORTANT: see note about the constructor
@@ -462,7 +470,9 @@ class QPBOInt:
 
         """
 
-    def modify_pairwise_term(self, e: NodeId, i: NodeId, j: NodeId, E00: int, E01: int, E10: int, E11: int):
+    def modify_pairwise_term(
+        self, e: NodeId, i: NodeId, j: NodeId, E00: int, E01: int, E10: int, E11: int
+    ):
         """
         This function modifies an already existing pairwise term.
 
