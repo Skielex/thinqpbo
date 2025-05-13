@@ -9,8 +9,9 @@ class QPBODouble:
     @staticmethod
     def __new__(cls, type, *args, **kwargs):
         """
-        Create and return a new object.  See help(type) for accurate signature.
+        Create and return a new object. See help(type) for accurate signature.
         """
+
     @staticmethod
     def __reduce__(*args, **kwargs): ...
     @staticmethod
@@ -22,20 +23,21 @@ class QPBODouble:
                 IMPORTANT: see note about the constructor
 
         """
-    def add_pairwise_term(
-        self, i: NodeId, j: NodeId, E00: float, E01: float, E10: float, E11: float
-    ):
+
+    def add_pairwise_term(self, i: NodeId, j: NodeId, E00: float, E01: float, E10: float, E11: float):
         """
         Adds pairwise term Eij(x_i, x_j) with cost values E00, E01, E10, E11.
                     IMPORTANT: see note about the constructor
 
         """
+
     def add_unary_term(self, i: NodeId, E0: float, E1: float):
         """
         Adds unary term Ei(x_i) to the energy function with cost values Ei(0)=E0, Ei(1)=E1.
                     Can be called multiple times for each node.
 
         """
+
     def compute_twice_energy(self, option=0):
         """
         Return energy bound.
@@ -47,11 +49,13 @@ class QPBODouble:
                 option == 1: returns 2 times the energy of solution set by the user (via SetLabel()).
 
         """
+
     def compute_twice_lower_bound(self):
         """
         Returns the lower bound defined by current reparameterizaion.
 
         """
+
     def compute_weak_persistencies(self):
         """
         Can only be called immediately after Solve()/Probe() (and before any modifications are made to the energy).
@@ -59,12 +63,14 @@ class QPBODouble:
                 NOTE: if the energy is submodular, then ComputeWeakPersistences() will label all nodes (in general, this is not necessarily true for Solve()).
 
         """
+
     def get_label(self, i):
         """
         Returns 0 or 1, if the node is labeled, and a negative number otherwise.
                     Can be called after Solve()/ComputeWeakPersistencies()/Probe()/Improve().
 
         """
+
     def get_node_num(self): ...
     def get_twice_pairwise_term(self, e: NodeId): ...
     def get_twice_unary_term(self, i: NodeId): ...
@@ -89,6 +95,7 @@ class QPBODouble:
                 order_array and fixed_pixels can point to the same array.
 
         """
+
     def load(self, filename: str):
         """
         Load energy from a text file. Current terms of the energy (if any) are destroyed.
@@ -96,19 +103,20 @@ class QPBODouble:
                     Returns true if success, false otherwise.
 
         """
+
     def merge_parallel_edges(self):
         """
         If AddPairwiseTerm(i,j,...) has been called twice for some pairs of nodes,
                 then MergeParallelEdges() must be called before calling Solve()/Probe()/Improve().
 
         """
-    def modify_pairwise_term(
-        self, e, i: NodeId, j: NodeId, E00: float, E01: float, E10: float, E11: float
-    ):
+
+    def modify_pairwise_term(self, e, i: NodeId, j: NodeId, E00: float, E01: float, E10: float, E11: float):
         """
         This function modifies an already existing pairwise term.
 
         """
+
     def reset(self):
         """
         Removes all nodes and edges.
@@ -118,12 +126,14 @@ class QPBODouble:
                 no calls to delete/new (which could be quite slow).
 
         """
+
     def save(self, filename: str):
         """
         Save current reparameterisation of the energy to a text file. (Note: possibly twice the energy is saved).
                     Returns true if success, false otherwise.
 
         """
+
     def set_label(self, i: NodeId, label: bool): ...
     def solve(self):
         """
@@ -132,6 +142,7 @@ class QPBODouble:
                     that if GetLabel(i)>=0 (i.e. node i is labeled) then x_i == GetLabel(i) for ALL global minima x.
 
         """
+
     def stitch(self):
         """
         GetRegion()/Stitch():
@@ -169,8 +180,9 @@ class QPBOFloat:
     @staticmethod
     def __new__(cls, *args, **kwargs):
         """
-        Create and return a new object.  See help(type) for accurate signature.
+        Create and return a new object. See help(type) for accurate signature.
         """
+
     @staticmethod
     def __reduce__(*args, **kwargs): ...
     @staticmethod
@@ -182,20 +194,21 @@ class QPBOFloat:
                 IMPORTANT: see note about the constructor
 
         """
-    def add_pairwise_term(
-        self, i: NodeId, j: NodeId, E00: float, E01: float, E10: float, E11: float
-    ):
+
+    def add_pairwise_term(self, i: NodeId, j: NodeId, E00: float, E01: float, E10: float, E11: float):
         """
         Adds pairwise term Eij(x_i, x_j) with cost values E00, E01, E10, E11.
                     IMPORTANT: see note about the constructor
 
         """
+
     def add_unary_term(self, i: NodeId, E0: float, E1: float):
         """
         Adds unary term Ei(x_i) to the energy function with cost values Ei(0)=E0, Ei(1)=E1.
                     Can be called multiple times for each node.
 
         """
+
     def compute_twice_energy(self, option=0):
         """
         Return energy bound.
@@ -207,11 +220,13 @@ class QPBOFloat:
                 option == 1: returns 2 times the energy of solution set by the user (via SetLabel()).
 
         """
+
     def compute_twice_lower_bound(self):
         """
         Returns the lower bound defined by current reparameterizaion.
 
         """
+
     def compute_weak_persistencies(self):
         """
         Can only be called immediately after Solve()/Probe() (and before any modifications are made to the energy).
@@ -219,12 +234,14 @@ class QPBOFloat:
                 NOTE: if the energy is submodular, then ComputeWeakPersistences() will label all nodes (in general, this is not necessarily true for Solve()).
 
         """
+
     def get_label(self, i: NodeId):
         """
         Returns 0 or 1, if the node is labeled, and a negative number otherwise.
                     Can be called after Solve()/ComputeWeakPersistencies()/Probe()/Improve().
 
         """
+
     def get_node_num(self): ...
     def get_twice_pairwise_term(self, e: NodeId): ...
     def get_twice_unary_term(self, i: NodeId): ...
@@ -249,6 +266,7 @@ class QPBOFloat:
                 order_array and fixed_pixels can point to the same array.
 
         """
+
     def load(self, filename: str):
         """
         Load energy from a text file. Current terms of the energy (if any) are destroyed.
@@ -256,12 +274,14 @@ class QPBOFloat:
                     Returns true if success, false otherwise.
 
         """
+
     def merge_parallel_edges(self):
         """
         If AddPairwiseTerm(i,j,...) has been called twice for some pairs of nodes,
                 then MergeParallelEdges() must be called before calling Solve()/Probe()/Improve().
 
         """
+
     def modify_pairwise_term(
         self,
         e: NodeId,
@@ -276,6 +296,7 @@ class QPBOFloat:
         This function modifies an already existing pairwise term.
 
         """
+
     def reset(self):
         """
         Removes all nodes and edges.
@@ -285,12 +306,14 @@ class QPBOFloat:
                 no calls to delete/new (which could be quite slow).
 
         """
+
     def save(self, filename: str):
         """
         Save current reparameterisation of the energy to a text file. (Note: possibly twice the energy is saved).
                     Returns true if success, false otherwise.
 
         """
+
     def set_label(self, i: NodeId, label: bool): ...
     def solve(self):
         """
@@ -299,6 +322,7 @@ class QPBOFloat:
                     that if GetLabel(i)>=0 (i.e. node i is labeled) then x_i == GetLabel(i) for ALL global minima x.
 
         """
+
     def stitch(self):
         """
         GetRegion()/Stitch():
@@ -336,8 +360,9 @@ class QPBOInt:
     @staticmethod
     def __new__(cls, *args, **kwargs):
         """
-        Create and return a new object.  See help(type) for accurate signature.
+        Create and return a new object. See help(type) for accurate signature.
         """
+
     @staticmethod
     def __reduce__(*args, **kwargs): ...
     @staticmethod
@@ -349,20 +374,21 @@ class QPBOInt:
                 IMPORTANT: see note about the constructor
 
         """
-    def add_pairwise_term(
-        self, i: NodeId, j: NodeId, E00: int, E01: int, E10: int, E11: int
-    ):
+
+    def add_pairwise_term(self, i: NodeId, j: NodeId, E00: int, E01: int, E10: int, E11: int):
         """
         Adds pairwise term Eij(x_i, x_j) with cost values E00, E01, E10, E11.
                     IMPORTANT: see note about the constructor
 
         """
+
     def add_unary_term(self, i: NodeId, E0: int, E1: int):
         """
         Adds unary term Ei(x_i) to the energy function with cost values Ei(0)=E0, Ei(1)=E1.
                     Can be called multiple times for each node.
 
         """
+
     def compute_twice_energy(self, option=0):
         """
         Return energy bound.
@@ -374,11 +400,13 @@ class QPBOInt:
                 option == 1: returns 2 times the energy of solution set by the user (via SetLabel()).
 
         """
+
     def compute_twice_lower_bound(self):
         """
         Returns the lower bound defined by current reparameterizaion.
 
         """
+
     def compute_weak_persistencies(self):
         """
         Can only be called immediately after Solve()/Probe() (and before any modifications are made to the energy).
@@ -386,12 +414,14 @@ class QPBOInt:
                 NOTE: if the energy is submodular, then ComputeWeakPersistences() will label all nodes (in general, this is not necessarily true for Solve()).
 
         """
+
     def get_label(self, i):
         """
         Returns 0 or 1, if the node is labeled, and a negative number otherwise.
                     Can be called after Solve()/ComputeWeakPersistencies()/Probe()/Improve().
 
         """
+
     def get_node_num(self): ...
     def get_twice_pairwise_term(self, e: NodeId): ...
     def get_twice_unary_term(self, i: NodeId): ...
@@ -416,6 +446,7 @@ class QPBOInt:
                 order_array and fixed_pixels can point to the same array.
 
         """
+
     def load(self, filename):
         """
         Load energy from a text file. Current terms of the energy (if any) are destroyed.
@@ -423,19 +454,20 @@ class QPBOInt:
                     Returns true if success, false otherwise.
 
         """
+
     def merge_parallel_edges(self):
         """
         If AddPairwiseTerm(i,j,...) has been called twice for some pairs of nodes,
                 then MergeParallelEdges() must be called before calling Solve()/Probe()/Improve().
 
         """
-    def modify_pairwise_term(
-        self, e: NodeId, i: NodeId, j: NodeId, E00: int, E01: int, E10: int, E11: int
-    ):
+
+    def modify_pairwise_term(self, e: NodeId, i: NodeId, j: NodeId, E00: int, E01: int, E10: int, E11: int):
         """
         This function modifies an already existing pairwise term.
 
         """
+
     def reset(self):
         """
         Removes all nodes and edges.
@@ -445,12 +477,14 @@ class QPBOInt:
                 no calls to delete/new (which could be quite slow).
 
         """
+
     def save(self, filename: str):
         """
         Save current reparameterisation of the energy to a text file. (Note: possibly twice the energy is saved).
                     Returns true if success, false otherwise.
 
         """
+
     def set_label(self, i: NodeId, label: bool): ...
     def solve(self):
         """
@@ -459,6 +493,7 @@ class QPBOInt:
                     that if GetLabel(i)>=0 (i.e. node i is labeled) then x_i == GetLabel(i) for ALL global minima x.
 
         """
+
     def stitch(self):
         """
         GetRegion()/Stitch():
